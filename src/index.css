@@ -122,7 +122,8 @@ li{
   padding: 1em;
 }
 
-input {
+input, textarea {
+  font-family: inherit;
   display: block;
   height: 3em;
   width: 100%;

@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const ThreadList = () => {
+  const url = "https://railway.bulletinboard.techtrain.dev/threads";
+  const [offset, setOffset] = useState(0);
   const [lists, setLists] = useState([]);
   useEffect(() => {
     const fetchLists = () => {
-      fetch('https://railway.bulletinboard.techtrain.dev/threads')
+      fetch(url+'?offset='+offset)
       .then(res => res.json())
       .then(json => {
         setLists(json);
-        console.log(json);
+        console.log(lists);
       });
     }
     fetchLists();
@@ -19,7 +22,7 @@ export const ThreadList = () => {
       スレッド一覧
       <ul className="threadlist">
         {lists.map((list) => (
-          <li key={list.id}>{list.title}</li>
+          <li key={list.id}><Link to={"thread/"+list.id}>{list.title}</Link></li>
         ))}
      </ul>
     </>
